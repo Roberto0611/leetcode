@@ -9,7 +9,7 @@ LeetCode problem link: https://leetcode.com/problems/two-sum/description/
 
 '''
 
-# Initializate the funcion
+# Initialize the function
 def twoSum(nums, target):
     for index,number in enumerate(nums):
         for index2,x in enumerate(nums):
