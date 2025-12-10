@@ -1,23 +1,23 @@
 def isValidSudoku(board):
     # recorrer filas 
     for i in range(len(board)):
-        numbers = []
+        numbers = set()
         for cell in board[i]:
             if cell == ".":
                 continue
             if cell in numbers:
                 return False
-            numbers.append(cell)
+            numbers.add(cell)
 
     #  recorrer columnas
     for i in range(len(board)):
-        numbers = []
+        numbers = set()
         for k in range(len(board)):
             if board[k][i] == ".":
                 continue
             if board[k][i] in numbers:
                 return False
-            numbers.append(board[k][i])
+            numbers.add(board[k][i])
 
     # recorrer cuadros de 3x3
     n = 0
@@ -25,14 +25,14 @@ def isValidSudoku(board):
     for i in range(3):
         for i in range(3):
             ## bloque inicia
-            numbers = []
+            numbers = set()
             for i in range(n,n+3):
                 for k in range(z,z+3):
                     if board[i][k] == ".":
                         continue
                     if board[i][k] in numbers:
                         return False
-                    numbers.append(board[i][k])
+                    numbers.add(board[i][k])
             n += 3
             ## bloque termina
         n = 0
