@@ -3,15 +3,24 @@
 # lowercase letters and removing all non-alphanumeric characters,
 # it reads the same forward and backward. Alphanumeric characters include letters and numbers.
 
-# imports
-import re
-
-# first approach
+# two pointers
 def isPalindrome(s):
-    # RegEx to clean and format the string 
-    cleanS = re.sub(r'[^a-zA-Z0-9]',"",s).lower()
-    # reverse string and compare
-    return cleanS[::-1] == cleanS
+    l = 0
+    r = len(s) - 1
+    while l < r:
+        if not s[l].isalnum():
+            l+=1
+            continue
+        if not s[r].isalnum():
+            r-=1 
+            continue
+        if s[l].lower() == s[r].lower():
+            l+=1
+            r-=1
+            continue
+        else:
+            return False
+    return True
 
 # call
 s = 'Race car'
