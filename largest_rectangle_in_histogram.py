@@ -1,25 +1,27 @@
 def largestRectangleArea(heights):
-    maxArea = 0
-    for index,height in enumerate(heights):
+        heights.append(0)
         stack = []
+        maxArea = 0
 
-        # checar lado derecho
-        for i in range(index, len(heights)):
-            if heights[i] >= height:
-                stack.append(heights[i])
+        for i in range(len(heights)):
+            if not stack:
+                stack.append(i)
                 continue
-            break
-        # checar lado izquierdo
-        for i in range(index - 1, -1, -1):
-            if heights[i] >= height:
-                stack.append(heights[i])
+                
+            if heights[i] >= heights[stack[-1]]:
+                stack.append(i)
                 continue
-            break
-        # calcular area
-        maxArea = max(maxArea,height * len(stack))
 
-    return maxArea
+            # en caso de que sea menor vamos a hacer un ciclo para eliminar menores
+            while stack and heights[i] < heights[stack[-1]]:
+                # calcular el area eliminada
+                h =  heights[stack.pop()]
+              
+                maxArea = max(maxArea,((i - 1) - (stack[-1] if stack else -1)) * h)
+            stack.append(i)
+            
+        return maxArea
 
 # testcase
-heights = [7,1,7,2,2,4]
+heights = [2,1,5,6,2,3]
 print(largestRectangleArea(heights))
